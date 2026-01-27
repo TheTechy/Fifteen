@@ -1,0 +1,330 @@
+:root {
+  --bg-color: #fdfcfb;
+  --text-color: #4a4a4a;
+  --high-priority: #ffb7b2; /* Pastel Coral */
+  --med-priority: #ffdac1;  /* Pastel Peach */
+  --low-priority: #b2e2f2;  /* Pastel Blue */
+  --done-color: #b5ead7;    /* Pastel Mint */
+  --border-radius: 12px;
+}
+
+/* Task 2.3: Modern Typography & Hover */
+h1 {
+  letter-spacing: -0.5px;
+}
+
+body {
+  width: 350px; /* Standard compact popup width */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 15px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+h1 { font-size: 1.2rem; margin: 0; font-weight: 600; }
+#task-count { font-size: 0.8rem; opacity: 0.6; }
+
+/* Input Area Styling */
+.input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: white;
+  padding: 12px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  margin-bottom: 20px;
+}
+
+#task-input {
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  padding: 5px;
+}
+
+/* Better Input Controls */
+.input-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+select, #priority-input, #tag-input {
+  border: 1.5px solid #f0f0f0;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  background-color: #fafafa;
+  color: #666;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+select, #priority-input:focus,
+#tag-input:focus {
+  border-color: var(--low-priority); /* Soft blue highlight */
+}
+
+#add-task-btn {
+  background-color: #4a4a4a;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+/* Task List Styling */
+#objective-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-item {
+  background: white;
+  margin-bottom: 8px;
+  padding: 12px;
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  border-left: 6px solid transparent;
+  transition: transform 0.2s ease;
+}
+
+/* Task Text Strikethrough */
+.task-item.is-completed .task-text {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.task-item.high { border-left-color: var(--high-priority); }
+.task-item.medium { border-left-color: var(--med-priority); }
+.task-item.low { border-left-color: var(--low-priority); }
+
+.task-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.task-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+}
+
+.status-circle {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #d1d1d1;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0; /* Prevents circle from squishing */
+}
+
+/* The Green Circle State */
+.status-circle.checked {
+  background-color: var(--done-color);
+  border-color: var(--done-color);
+}
+
+/* The Checkmark (appears when checked) */
+.status-circle.checked::after {
+  content: '';
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  margin-bottom: 2px;
+}
+
+.task-tags {
+  display: flex;
+  gap: 5px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+/* Task 3.3: Pill-Shaped Tags */
+.tag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  background: #f1f3f5;
+  color: #777;
+  padding: 3px 10px;
+  border-radius: 20px; /* Makes it a pill */
+  text-transform: lowercase;
+  display: inline-block;
+  letter-spacing: 0.3px;
+}
+
+/* Priority labels on the task cards (Optional visual aid) */
+.priority-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-left: auto;
+  opacity: 0.4;
+}
+
+.timer-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #eee;
+}
+
+.timer-btn {
+  background: #f8f9fa;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.timer-btn:hover { background: var(--low-priority); }
+.timer-btn.active {
+	background-color: var(--text-color) !important;
+	color: white !important;
+	border-color: var(--text-color);
+}
+
+.time-remaining {
+  font-family: monospace;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #e67e22;
+  margin-left: auto;
+}
+
+/* Cancel button styling */
+.cancel-btn {
+  background-color: #fff0f0;
+  color: #ff5c5c;
+  border: 1px solid #ffdbdb;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.cancel-btn:hover {
+  background-color: #ff5c5c;
+  color: white;
+}
+
+/* The ticking countdown text */
+.time-remaining {
+  font-variant-numeric: tabular-nums; /* Prevents text jumping while counting */
+  font-weight: 600;
+  color: #d35400; /* Subtle orange for urgency */
+}
+
+.sortable-ghost {
+  opacity: 0.4;
+  background-color: #e9ecef !important;
+  border: 2px dashed #ccc !important;
+}
+
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#reset-all-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+#reset-all-btn:hover { opacity: 1; }
+
+.delete-btn {
+  color: #ffb7b2;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 10px;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.delete-btn:hover { color: #ff5c5c; }
+
+/* Inline Edit Style */
+.task-text[contenteditable="true"] {
+  border-bottom: 1px dashed #ccc;
+  outline: none;
+  background: #fffcf0; /* Very light yellow highlight while editing */
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #bbb;
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.empty-state p {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.filter-container {
+  margin: 10px 0;
+  padding: 0 15px;
+}
+
+#search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #eee;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  background-color: #f9f9f9;
+  outline: none;
+  transition: all 0.2s;
+}
+
+#search-input:focus {
+  background-color: #fff;
+  border-color: var(--low-priority);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
