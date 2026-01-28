@@ -2,6 +2,8 @@
 let objectives = [];
 let countdownInterval;
 
+const maxObjectives = 8;
+
 // Selectors
 const taskInput = document.getElementById('task-input');
 const priorityInput = document.getElementById('priority-input');
@@ -35,8 +37,8 @@ function startUIUpdateLoop() {
 // --- Core Functions ---
 
 function handleAddTask() {
-  if (objectives.length >= 15) {
-    alert("Focus! You've reached the 15-objective limit.");
+  if (objectives.length >= maxObjectives) {
+    alert("Focus! You've reached the " + maxObjectives + "-objective limit.");
     return;
   }
   const taskText = taskInput.value.trim();
@@ -81,7 +83,7 @@ function renderObjectives(filterText = '') {
     return matchesTitle || matchesPriority || matchesTags;
   });
 
-  countDisplay.textContent = `${objectives.length}/15`;
+  countDisplay.textContent = `${objectives.length}/${maxObjectives}`;
 
   if (filtered.length === 0) {
     listContainer.innerHTML = `
