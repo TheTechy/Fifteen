@@ -1,66 +1,65 @@
 :root {
-	--bg-color: #fdfcfb;
-	--text-color: #4a4a4a;
-	--high-priority: #ffb7b2; /* Pastel Coral */
-	--med-priority: #ffdac1;  /* Pastel Peach */
-	--low-priority: #b2e2f2;  /* Pastel Blue */
-	--done-color: #b5ead7;    /* Pastel Mint */
-	--border-radius: 12px;
+--bg-color: #fdfcfb;
+--text-color: #4a4a4a;
+--high-priority: #ffb7b2; /* Pastel Coral */
+--med-priority: #ffdac1;  /* Pastel Peach */
+--low-priority: #b2e2f2;  /* Pastel Blue */
+--done-color: #b5ead7;    /* Pastel Mint */
+--border-radius: 12px;
 }
 
 /* Task 2.3: Modern Typography & Hover */
 h1 {
-	letter-spacing: -0.5px;
+font-size: 1.2rem;
+margin: 0;
+font-weight: 600;
+letter-spacing: -0.5px;
 }
 
 body {
-	width: 350px; /* Standard compact popup width */
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	background-color: var(--bg-color);
-	color: var(--text-color);
-	margin: 0;
-	padding: 15px;
+width: 350px; /* Standard compact popup width */
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background-color: var(--bg-color);
+color: var(--text-color);
+margin: 0;
+padding: 15px;
 }
 
 header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 20px;
-}
-
-h1 {
-	font-size: 1.2rem; margin: 0; font-weight: 600;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
 }
 
 #task-count {
-	font-size: 0.8rem; opacity: 0.6;
+font-size: 0.8rem; opacity: 0.6;
 }
 
 /* Input Area Styling */
 .input-area {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-	background: white;
-	padding: 12px;
-	border-radius: var(--border-radius);
-	box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-	margin-bottom: 20px;
+display: flex;
+flex-direction: column;
+gap: 10px;
+background: white;
+padding: 12px;
+border-radius: var(--border-radius);
+box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+margin-bottom: 20px;
 }
 
 #task-input {
-	border: none;
-	outline: none;
-	font-size: 1rem;
-	padding: 5px;
+border: none;
+outline: none;
+font-size: 1rem;
+padding: 5px;
 }
 
 /* Better Input Controls */
 .input-controls {
-	display: flex;
-	gap: 10px;
-	align-items: center;
+display: flex;
+gap: 10px;
+align-items: center;
 }
 
 select, #priority-input, #tag-input {
@@ -335,7 +334,7 @@ box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .priority-label:hover {
-  filter: brightness(0.9);
-  transform: scale(1.05);
-  transition: transform 0.1s ease;
+filter: brightness(0.9);
+transform: scale(1.05);
+transition: transform 0.1s ease;
 }

@@ -1,45 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Do This Today</title>
-</head>
-<body>
-  <div class="container">
-<header>
-  <h1>Fifteen</h1>
-  <div class="header-right">
-    <span id="task-count">0/15</span>
-    <button id="reset-all-btn" title="Clear all tasks">🗑️</button>
-  </div>
-</header>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="style.css">
+		<title>Fifteen</title>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1>Fifteen</h1>
+				<div class="header-right">
+					<span id="task-count">0/15</span>
+					<button id="reset-all-btn" title="Clear all tasks">🗑️</button>
+				</div>
+			</header>
 
-    <div class="input-area">
-      <input type="text" id="task-input" placeholder="What's the micro-objective?" maxlength="60">
-
-      <div class="input-controls">
-        <select id="priority-input">
-          <option value="low">Low</option>
-          <option value="medium" selected>Medium</option>
-          <option value="high">High</option>
-        </select>
-
-        <input type="text" id="tag-input" placeholder="Tags (max 5, comma separated)">
-
-        <button id="add-task-btn">+</button>
-      </div>
-    </div>
-    <div class="filter-container">
-  <input type="text" id="search-input" placeholder="Filter by title, #tag, or priority...">
-</div>
-
-    <ul id="objective-list">
-      </ul>
-  </div>
-
-  <script src="js/sortable.min.js"></script>
-  <script src="popup.js"></script>
-</body>
+			<div class="input-area">
+				<input type="text" id="task-input" placeholder="What's the micro-objective?" maxlength="60">
+				<div class="input-controls">
+					<select id="priority-input">
+						<option value="low">Low</option>
+						<option value="medium" selected>Medium</option>
+						<option value="high">High</option>
+					</select>
+					<input type="text" id="tag-input" placeholder="Tags (max 5, comma separated)">
+					<button id="add-task-btn">+</button>
+				</div>
+			</div>
+			<div class="filter-container">
+				<input type="text" id="search-input" placeholder="Filter by title, #tag, or priority...">
+			</div>
+			<ul id="objective-list"></ul>
+		</div>
+		<script src="js/sortable.min.js"></script>
+		<script src="popup.js"></script>
+	</body>
 </html>
