@@ -104,8 +104,7 @@ function renderObjectives(filterText = '') {
           <div class="status-circle ${obj.completed ? 'checked' : ''}" data-id="${obj.id}"></div>
           <span class="task-text" data-id="${obj.id}" contenteditable="true">${obj.text}</span>
         </div>
-        <span class="priority-label">${obj.priority}</span>
-        <span class="delete-btn" data-id="${obj.id}" title="Delete objective">&times;</span>
+      <span class="priority-label" data-id="${obj.id}" style="cursor: pointer;" title="Click to change priority">${obj.priority}</span>        <span class="delete-btn" data-id="${obj.id}" title="Delete objective">&times;</span>
       </div>
       <div class="task-tags">
         ${obj.tags.map(tag => `<span class="tag">#${tag}</span>`).join('')}
@@ -175,6 +174,21 @@ listContainer.addEventListener('click', (e) => {
   if (e.target.classList.contains('cancel-btn')) {
     cancelTimer(taskId);
   }
+
+// 5. Cycle Priority In-Situ
+if (e.target.classList.contains('priority-label')) {
+  const task = objectives.find(obj => obj.id == taskId);
+  if (task) {
+    const levels = ['low', 'medium', 'high'];
+    let currentIndex = levels.indexOf(task.priority);
+
+    // Cycle to next: 0->1, 1->2, 2->0
+    let nextIndex = (currentIndex + 1) % levels.length;
+    task.priority = levels[nextIndex];
+
+    saveAndRender();
+  }
+}
 });
 
 // Inline Editing Blur
