@@ -13,16 +13,16 @@ const resetBtn = document.getElementById('reset-all-btn');
 const searchInput = document.getElementById('search-input');
 
 // --- Initialization ---
-
 document.addEventListener('DOMContentLoaded', () => {
   chrome.storage.sync.get(['objectives'], (result) => {
     if (result.objectives) {
       objectives = result.objectives;
       renderObjectives();
       startUIUpdateLoop();
+      updateBadge(); // Set initial badge count
     }
   });
-  taskInput.focus(); // Initial focus when opening
+  taskInput.focus();
 });
 
 function startUIUpdateLoop() {
@@ -64,8 +64,8 @@ function handleAddTask() {
 
 function saveAndRender() {
   chrome.storage.sync.set({ objectives }, () => {
-    // Pass the current search value so the filter stays active
     renderObjectives(searchInput.value.toLowerCase());
+    updateBadge(); // Update the icon badge
   });
 }
 
@@ -249,3 +249,12 @@ const sortable = new Sortable(listContainer, {
 searchInput.addEventListener('input', (e) => {
   renderObjectives(e.target.value.toLowerCase());
 });
+
+function updateBadge() {
+  const count = objectives.length;
+  // If count is 0, we can hide the badge by setting it to an empty string
+  const badgeText = count > 0 ? count.toString() : '';
+
+  chrome.action.setBadgeText({ text: badgeText });
+  chrome.action.setBadgeBackgroundColor({ color: '#B2CEE0' }); // Matching your pastel blue
+}
