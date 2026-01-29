@@ -64,64 +64,58 @@ function handleAddTask() {
 }
 
 function saveAndRender() {
-chrome.storage.sync.set({ objectives }, () => {
-renderObjectives(searchInput.value.toLowerCase());
-updateBadge(); // Update the icon badge
-});
-}
+	chrome.storage.sync.set({ objectives }, () => {
+		renderObjectives(searchInput.value.toLowerCase());
+		updateBadge(); // Update the icon badge
+		});
+	}
 
-function renderObjectives(filterText = '') {
-listContainer.innerHTML = '';
+	function renderObjectives(filterText = '') {
+		listContainer.innerHTML = '';
 
-// 1. Filter the objectives array based on the search query
-const filtered = objectives.filter(obj => {
-const matchesTitle = obj.text.toLowerCase().includes(filterText);
-const matchesPriority = obj.priority.toLowerCase().includes(filterText);
-const matchesTags = obj.tags.some(tag => tag.toLowerCase().includes(filterText.replace('#', '')));
+		// 1. Filter the objectives array based on the search query
+		const filtered = objectives.filter(obj => {
+			const matchesTitle = obj.text.toLowerCase().includes(filterText);
+			const matchesPriority = obj.priority.toLowerCase().includes(filterText);
+			const matchesTags = obj.tags.some(tag => tag.toLowerCase().includes(filterText.replace('#', '')));
 
-return matchesTitle || matchesPriority || matchesTags;
-});
+			return matchesTitle || matchesPriority || matchesTags;
+		});
 
-countDisplay.textContent = `${objectives.length}/${maxObjectives}`;
+		countDisplay.textContent = `${objectives.length}/${maxObjectives}`;
 
-if (filtered.length === 0) {
-listContainer.innerHTML = `
-<div class="empty-state">
-<span class="empty-state-icon">✨</span>
-<p>${objectives.length === 0 ? "What are we achieving today?" : "No matches found."}</p>
-</div>
-`;
-return;
-}
+		if (filtered.length === 0) {
+			listContainer.innerHTML = `
+				<div class="empty-state">
+				<span class="empty-state-icon">✨</span>
+				<p>${objectives.length === 0 ? "What are we achieving today?" : "No matches found."}</p>
+				</div>
+			`;
+		return;
+	}
 
-filtered.forEach(obj => {
-const li = document.createElement('li');
-li.className = `task-item ${obj.priority} ${obj.completed ? 'is-completed' : ''}`;
-const hasActiveTimer = obj.timerEnd && obj.timerEnd > Date.now();
+	filtered.forEach(obj => {
+		const li = document.createElement('li');
+		li.className = `task-item ${obj.priority} ${obj.completed ? 'is-completed' : ''}`;
+		const hasActiveTimer = obj.timerEnd && obj.timerEnd > Date.now();
 
-li.innerHTML = `
-<div class="task-main-row" style="display: flex; align-items: center; width: 100%;">
-<div class="task-left" style="display: flex; align-items: center; gap: 10px; flex-grow: 1;">
-<div class="status-circle ${obj.completed ? 'checked' : ''}" data-id="${obj.id}"></div>
-<span class="task-text" data-id="${obj.id}" contenteditable="true">${obj.text}</span>
-</div>
-<span class="priority-label" data-id="${obj.id}" style="cursor: pointer;" title="Click to change priority">${obj.priority}</span>        <span class="delete-btn" data-id="${obj.id}" title="Delete objective">&times;</span>
-</div>
-<div class="task-tags">
-${obj.tags.map(tag => `<span class="tag">#${tag}</span>`).join('')}
-</div>
-<div class="timer-controls">
-${hasActiveTimer ? `
-<button class="cancel-btn" data-id="${obj.id}">Cancel Timer</button>
-` : `
-<span>Set:</span>
-${[1, 2, 3, 5, 8].map(h => `<button class="timer-btn" data-id="${obj.id}" data-hours="${h}">${h}h</button>`).join('')}
-`}
-<span class="time-remaining" id="timer-display-${obj.id}"></span>
-</div>
-`;
-listContainer.appendChild(li);
-});
+		li.innerHTML = `
+			<div class="task-main-row" style="display: flex; align-items: center; width: 100%;">
+				<div class="task-left" style="display: flex; align-items: center; gap: 10px; flex-grow: 1;">
+					<div class="status-circle ${obj.completed ? 'checked' : ''}" data-id="${obj.id}"></div>
+					<span class="task-text" data-id="${obj.id}" contenteditable="true">${obj.text}</span>
+				</div>
+				<span class="priority-label" data-id="${obj.id}" style="cursor: pointer;" title="Click to change priority">${obj.priority}</span>
+				<span class="delete-btn" data-id="${obj.id}" title="Delete objective">&times;</span>
+			</div>
+			<div class="task-tags">
+				${obj.tags.map(tag => `<span class="tag">#${tag}</span>`).join('')}
+			</div>
+			<div class="timer-controls">${hasActiveTimer ? `<button class="cancel-btn" data-id="${obj.id}">Cancel Timer</button>` : `<span>Set:</span> ${[1, 2, 3, 5, 8].map(h => `<button class="timer-btn" data-id="${obj.id}" data-hours="${h}">${h}h</button>`).join('')}`}
+				<span class="time-remaining" id="timer-display-${obj.id}"></span>
+			</div>`;
+		listContainer.appendChild(li);
+	});
 }
 
 // --- Event Listeners ---
