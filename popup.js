@@ -122,10 +122,11 @@ function saveAndRender() {
 
 // Add Task via Click or Enter
 addBtn.addEventListener('click', handleAddTask);
+
 [taskInput, tagInput].forEach(el => {
-el.addEventListener('keydown', (e) => {
-if (e.key === 'Enter') handleAddTask();
-});
+	el.addEventListener('keydown', (e) => {
+		if (e.key === 'Enter') handleAddTask();
+	});
 });
 
 // Global Reset
